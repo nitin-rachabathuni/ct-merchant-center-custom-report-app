@@ -1,0 +1,64 @@
+query GetProductDetails($id: String)   {
+  product(id: $id) {
+    id
+    key
+    skus
+    version
+    productTypeRef {
+      typeId
+      id
+    }
+    productType {
+      id
+      key
+      name
+      description
+    }
+    priceMode
+    masterData {
+      published
+      hasStagedChanges
+      staged {
+        ...Product
+      }
+      current {
+        ...Product
+      }
+    }
+    createdAt
+    lastModifiedAt
+  }
+}
+fragment Product on ProductData {
+  skus
+  categories {
+    key
+    nameAllLocales {
+      locale
+      value
+    }
+  }
+  nameAllLocales {
+    locale
+    value
+  }
+  descriptionAllLocales {
+    locale
+    value
+  }
+  masterVariant {
+    sku
+    id
+    attributesRaw {
+      name
+      value
+    }
+    prices {
+      value {
+        currencyCode
+        centAmount
+        fractionDigits
+      }
+    }
+  }
+}

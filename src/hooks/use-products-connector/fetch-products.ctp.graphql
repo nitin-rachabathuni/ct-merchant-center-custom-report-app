@@ -1,0 +1,40 @@
+query FetchProducts(
+  $locale: Locale!
+  $limit: Int!
+  $offset: Int
+  $text: String
+  $sort: [String!]
+) {
+  productProjectionSearch(
+    locale: $locale
+    staged: true
+    limit: $limit
+    offset: $offset
+    text: $text
+    sorts: $sort
+  ) {
+    total
+    count
+    offset
+    results {
+      id
+      key
+      nameAllLocales {
+        locale
+        value
+      }
+      masterVariant {
+        sku
+      }
+      published
+      hasStagedChanges
+      productType {
+        key
+        name
+      }
+      version
+      createdAt
+      lastModifiedAt
+    }
+  }
+}

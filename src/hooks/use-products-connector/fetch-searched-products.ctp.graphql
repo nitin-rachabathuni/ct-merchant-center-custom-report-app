@@ -1,0 +1,29 @@
+query searchProducts(
+  $locale: Locale!
+  $staged: Boolean!
+  $limit: Int!
+  $offset: Int
+  $text: String!
+  $sorts: [String!]
+) {
+  productProjectionSearch(
+    locale: $locale
+    staged: $staged
+    limit: $limit
+    offset: $offset
+    text: $text
+  ) {
+    total
+    count
+    offset
+    results {
+      id
+      key
+      nameAllLocales {
+        locale
+        value
+      }
+      
+    }
+  }
+}
